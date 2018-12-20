@@ -1,6 +1,6 @@
 package water.ustc.action;
 
-import water.ustc.util.ProduceTimeFormatted;
+import water.ustc.util.FormattedTime;
 
 /**
  * Creator: hfang
@@ -24,10 +24,10 @@ public class RegisterAction {
 
         if(a>5) {
             registerState = true;
-            System.out.println(ProduceTimeFormatted.getCurrentTime()+TAG+SUCCESS_RETURN_VALUE);
+            System.out.println(FormattedTime.getCurrentTime()+TAG+SUCCESS_RETURN_VALUE);
         } else {
             registerState = false;
-            System.out.println(ProduceTimeFormatted.getCurrentTime()+TAG+FAILURE_RETURN_VALUE);
+            System.out.println(FormattedTime.getCurrentTime()+TAG+FAILURE_RETURN_VALUE);
         }
         return registerState?SUCCESS_RETURN_VALUE:FAILURE_RETURN_VALUE;
     }

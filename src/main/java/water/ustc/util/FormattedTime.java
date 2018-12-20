@@ -9,7 +9,7 @@ import java.util.Date;
  * Description: Use to generate Time information in [yyyy-MM-dd HH:mm:ss:SSS] format.
  **/
 
-public class ProduceTimeFormatted {
+public class FormattedTime {
 
     public static String getCurrentTime() {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");//设置日期格式

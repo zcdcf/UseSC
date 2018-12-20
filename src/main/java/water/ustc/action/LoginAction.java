@@ -1,8 +1,6 @@
 package water.ustc.action;
 
-import water.ustc.util.ProduceTimeFormatted;
-
-import javax.xml.stream.FactoryConfigurationError;
+import water.ustc.util.FormattedTime;
 
 /**
  * Creator: hfang
@@ -24,10 +22,10 @@ public class LoginAction {
         boolean loginState = false;
         if(a>5) {
             loginState = true;
-            System.out.println(ProduceTimeFormatted.getCurrentTime()+TAG+SUCCESS_RETURN_VALUE);
+            System.out.println(FormattedTime.getCurrentTime()+TAG+SUCCESS_RETURN_VALUE);
         } else {
             loginState = false;
-            System.out.println(ProduceTimeFormatted.getCurrentTime()+TAG+FAILURE_RETURN_VALUE);
+            System.out.println(FormattedTime.getCurrentTime()+TAG+FAILURE_RETURN_VALUE);
         }
         return loginState?SUCCESS_RETURN_VALUE:FAILURE_RETURN_VALUE;
     }
