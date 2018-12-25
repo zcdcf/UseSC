@@ -37,9 +37,13 @@ public class LogInterceptor {
         this.startTime = FormattedTime.getCurrentTime();
         this.actionName = actionName;
 
+        // open log.xml
         File file = new File(projectRootPath+ConstRepo.LOG_FILE_PATH);
         Document document = null;
         Element root;
+        // test if log.xml exist
+        // if not, create a new file and add root Node
+        // else, read the file
         if(!file.exists()) {
             try {
                 file.createNewFile();
@@ -60,10 +64,12 @@ public class LogInterceptor {
 
         System.out.println(TAG+"s-time = "+this.startTime+" action name = "+this.actionName);
 
+        // add node-action and sub-node name and s-time
         Element ActionNode = root.addElement("action");
         ActionNode.addElement("name").addText(this.actionName);
         ActionNode.addElement("s-time").addText(this.startTime);
 
+        // use XMLWriter write the document into the log.xml
         XMLWriter writer;
         try {
             writer = new XMLWriter(new FileWriter(new File(projectRootPath+ConstRepo.LOG_FILE_PATH)),OutputFormat.createPrettyPrint());
@@ -89,7 +95,8 @@ public class LogInterceptor {
 
         System.out.println(TAG+" e-time"+this.finishTime+" result = "+result);
 
-
+        // traverse the xml and find the last action node
+        // to add sub-node e-time and result
         List<Node> actionNodeList = root.selectNodes("//log/action");
         for(Iterator iterator = actionNodeList.iterator(); iterator.hasNext(); ) {
            Element node = (Element) iterator.next();
