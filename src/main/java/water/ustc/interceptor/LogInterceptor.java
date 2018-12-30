@@ -4,7 +4,6 @@ import org.dom4j.*;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
-import sc.ustc.util.ProduceTimeFormatted;
 import water.ustc.model.ConstRepo;
 import water.ustc.util.FormattedTime;
 import sc.ustc.model.RunTimeVar;
@@ -24,7 +23,7 @@ public class LogInterceptor {
     private String startTime;
     private String finishTime;
     private String projectRootPath = RunTimeVar.projectRootPath;
-    private static final String TAG = ProduceTimeFormatted.getCurrentTime()+"water.ustc.interceptor.LogInterceptor:";
+    private static final String TAG = FormattedTime.getCurrentTime()+"water.ustc.interceptor.LogInterceptor:";
 
     public LogInterceptor() {
     }

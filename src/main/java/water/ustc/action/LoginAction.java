@@ -1,6 +1,9 @@
 package water.ustc.action;
 
+import water.ustc.bean.UserBean;
+import water.ustc.model.ConstRepo;
 import water.ustc.util.FormattedTime;
+import water.ustc.util.XMLModifier;
 
 /**
  * Creator: hfang
@@ -9,24 +12,23 @@ import water.ustc.util.FormattedTime;
  **/
 
 public class LoginAction {
-    private static String SUCCESS_RETURN_VALUE = "success";
-    private static String FAILURE_RETURN_VALUE = "failure";
     private static String TAG = "water.ustc.action: Login state ";
+    private String userName;
+    private String password;
 
     public LoginAction() {
 
     }
 
     public String handleLogin() {
-        double a = Math.random()*10;
-        boolean loginState = false;
-        if(a>5) {
-            loginState = true;
-            System.out.println(FormattedTime.getCurrentTime()+TAG+SUCCESS_RETURN_VALUE);
+        UserBean userBean = new UserBean(ConstRepo.DB_DEFAULT_USERID, this.userName, this.password);
+        if(userBean.signIn()) {
+            System.out.println(FormattedTime.getCurrentTime()+TAG+"success");
+            XMLModifier.UpdateSuccessView(userBean);
+            return "success";
         } else {
-            loginState = false;
-            System.out.println(FormattedTime.getCurrentTime()+TAG+FAILURE_RETURN_VALUE);
+            System.out.println(FormattedTime.getCurrentTime()+TAG+"FAILURE");
+            return "failure";
         }
-        return loginState?SUCCESS_RETURN_VALUE:FAILURE_RETURN_VALUE;
     }
 }

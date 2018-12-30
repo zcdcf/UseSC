@@ -4,6 +4,6 @@
     <title>Failure Page</title>
 </head>
 <body>
-    Sorry, failured!
+    用户名或密码错误！
 </body>
 </html>
