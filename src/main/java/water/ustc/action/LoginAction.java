@@ -21,6 +21,7 @@ public class LoginAction {
     }
 
     public String handleLogin() {
+        System.out.println(TAG+"start handle login");
         UserBean userBean = new UserBean(ConstRepo.DB_DEFAULT_USERID, this.userName, this.password);
         if(userBean.signIn()) {
             System.out.println(FormattedTime.getCurrentTime()+TAG+"success");

@@ -1,10 +1,12 @@
 package water.ustc.dao;
 
 import sc.ustc.dao.BaseDAO;
+import sc.ustc.dao.Conversation;
 import water.ustc.bean.UserBean;
 import water.ustc.model.ConstRepo;
 import water.ustc.util.FormattedTime;
 
+import javax.sql.rowset.CachedRowSet;
 import java.sql.*;
 
 /**
@@ -19,7 +21,50 @@ public class UserDAO extends BaseDAO {
         super(url, userName, userPassword, driver);
     }
 
-    public Object query(String sql) {
+    public UserDAO() {
+
+    }
+    @Override
+    public Object query(Object queryObj, String field) {
+        Conversation conversation = new Conversation();
+        CachedRowSet rowSet = (CachedRowSet) conversation.query(queryObj, field);
+        try {
+            String name = null;
+            String password = null;
+            if(rowSet.next()) {
+                name = rowSet.getString(2);
+                System.out.println(TAG+"name="+name);
+                password = rowSet.getString(3);
+                System.out.println(TAG+"password="+password);
+            }
+            if(name==null) {
+                return null;
+            } else {
+                return new UserBean(ConstRepo.DB_DEFAULT_USERID, name, password);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean insert(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean update(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean delete(String s) {
+        return false;
+    }
+
+/*    public Object query(String sql) {
         Connection connection = super.openDBConnection();
         ResultSet resultSet = null;
         UserBean userBean = null;
@@ -29,10 +74,9 @@ public class UserDAO extends BaseDAO {
             resultSet = statement.executeQuery(sql);
             String name = null;
             String password = null;
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 name = resultSet.getString(1);
                 password = resultSet.getString(2);
-                break;
             }
             if(name!=null) {
                 userBean = new UserBean(ConstRepo.DB_DEFAULT_USERID, name, password);
@@ -72,5 +116,5 @@ public class UserDAO extends BaseDAO {
 
     public boolean delete(String sql) {
         return update(sql);
-    }
+    }*/
 }

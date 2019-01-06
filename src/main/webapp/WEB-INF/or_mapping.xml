@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OR-Mappings>
+    <jdbc>
+        <property>
+            <name>driver_class</name>
+            <value>org.sqlite.JDBC</value>
+        </property>
+        <property>
+            <name>url_path</name>
+            <value>jdbc:sqlite://E:\IDEA-JAVA\UseSC\src\main\webapp\WEB-INF\database\loginInfo.db</value>
+        </property>
+        <property>
+            <name>table_name</name>
+            <value>user_info</value>
+        </property>
+        <property>
+            <name>db_username</name>
+            <value>hfang</value>
+        </property>
+        <property>
+            <name>db_userpassword</name>
+            <value>123456*</value>
+        </property>
+    </jdbc>
+    <class>
+        <name>UserBean</name>
+        <table>user_info</table>
+        <id>
+            <name>userID</name>
+        </id>
+        <property>
+            <name>userName</name>
+            <column>NAME</column>
+            <type>TEXT</type>
+            <lazy>false</lazy>
+        </property>
+        <property>
+            <name>userPassword</name>
+            <column>PASSWORD</column>
+            <type>TEXT</type>
+            <lazy>true</lazy>
+        </property>
+    </class>
+</OR-Mappings>

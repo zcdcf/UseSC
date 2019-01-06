@@ -1,10 +1,14 @@
 package water.ustc.bean;
 
+import sc.ustc.dao.Conversation;
 import sc.ustc.model.RunTimeVar;
 import water.ustc.dao.UserDAO;
 import water.ustc.factory.UserDAOFactory;
 import water.ustc.model.ConstRepo;
 import water.ustc.util.FormattedTime;
+
+import javax.sql.rowset.CachedRowSet;
+import java.sql.SQLException;
 
 /**
  * Creator: hfang
@@ -26,9 +30,9 @@ public class UserBean {
     }
 
     public boolean signIn() {
-        userDAO = UserDAOFactory.getUserDAO(ConstRepo.JDBC_PREFIX+ RunTimeVar.projectRootPath+ConstRepo.LOGIN_DB_PATH, ConstRepo.DB_DEFAULT_USERNAME, ConstRepo.DB_DEFAULT_PASSWORD, ConstRepo.LOG_DB_DRIVER);
+        /*userDAO = UserDAOFactory.getUserDAO(ConstRepo.JDBC_PREFIX+ RunTimeVar.projectRootPath+ConstRepo.LOGIN_DB_PATH, ConstRepo.DB_DEFAULT_USERNAME, ConstRepo.DB_DEFAULT_PASSWORD, ConstRepo.LOG_DB_DRIVER);
         String sql = "SELECT * FROM logininfo where NAME=\""+this.userName+"\"";
-        UserBean queryUser = (UserBean) userDAO.query(sql);
+        UserBean queryUser = (UserBean) userDAO.query(this);
         if(queryUser==null) {
             System.out.println(TAG+"didn't found data in db");
             return false;
@@ -40,7 +44,12 @@ public class UserBean {
             } else {
                 return false;
             }
-        }
+        }*/
+        System.out.println(TAG+"UserBean is signing");
+        UserDAO userDAO = new UserDAO();
+        UserBean userBean = (UserBean) userDAO.query(this, "NAME");
+
+        return userBean != null && userBean.getUserPassword().equals(this.userPassword);
     }
 
     public String getUserID() {
