@@ -12,9 +12,10 @@ import water.ustc.util.XMLModifier;
  **/
 
 public class LoginAction {
-    private static String TAG = "water.ustc.action: Login state ";
-    private String userName;
-    private String password;
+    private static String TAG = FormattedTime.getCurrentTime()+"water.ustc.action.LoginAction:";
+//    private String userName;
+//    private String password;
+    private UserBean userBean;
 
     public LoginAction() {
 
@@ -22,7 +23,7 @@ public class LoginAction {
 
     public String handleLogin() {
         System.out.println(TAG+"start handle login");
-        UserBean userBean = new UserBean(ConstRepo.DB_DEFAULT_USERID, this.userName, this.password);
+//        UserBean userBean = new UserBean(ConstRepo.DB_DEFAULT_USERID, this.userName, this.password);
         if(userBean.signIn()) {
             System.out.println(FormattedTime.getCurrentTime()+TAG+"success");
             XMLModifier.UpdateSuccessView(userBean);
@@ -31,5 +32,9 @@ public class LoginAction {
             System.out.println(FormattedTime.getCurrentTime()+TAG+"FAILURE");
             return "failure";
         }
+    }
+
+    public void setUserBean(UserBean userBean) {
+        this.userBean = userBean;
     }
 }

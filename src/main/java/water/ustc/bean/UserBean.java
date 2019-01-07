@@ -23,6 +23,10 @@ public class UserBean {
     private UserDAO userDAO;
     private static final String TAG = FormattedTime.getCurrentTime()+"water.ustc.bean.UserBean:";
 
+    public UserBean() {
+
+    }
+
     public UserBean(String userID, String userName, String userPassword) {
         this.userID = userID;
         this.userName = userName;
@@ -46,6 +50,7 @@ public class UserBean {
             }
         }*/
         System.out.println(TAG+"UserBean is signing");
+        System.out.println(TAG+"name is "+userName+" password is "+userPassword);
         UserDAO userDAO = new UserDAO();
         UserBean userBean = (UserBean) userDAO.query(this, "NAME");
 

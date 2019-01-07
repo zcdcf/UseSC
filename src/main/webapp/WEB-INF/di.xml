@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<sc-di>
+    <bean id="user" class="water.ustc.bean.UserBean"></bean>
+    <bean id="LoginAction" class="LoginAction">
+        <field name="userBean" bean-ref="user"></field>
+    </bean>
+    <!-- some beans -->
+</sc-di>
