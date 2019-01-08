@@ -7,7 +7,7 @@
         </property>
         <property>
             <name>url_path</name>
-            <value>jdbc:sqlite://E:\IDEA-JAVA\UseSC\src\main\webapp\WEB-INF\database\loginInfo.db</value>
+            <value>jdbc:sqlite://E:\IDEA-JAVA\UseSC\src\main\webapp\WEB-INF\database\Login.db</value>
         </property>
         <property>
             <name>table_name</name>
@@ -26,7 +26,7 @@
         <name>UserBean</name>
         <table>user_info</table>
         <id>
-            <name>userID</name>
+            <name>ID</name>
         </id>
         <property>
             <name>userName</name>

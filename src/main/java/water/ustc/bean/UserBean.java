@@ -1,14 +1,7 @@
 package water.ustc.bean;
 
-import sc.ustc.dao.Conversation;
-import sc.ustc.model.RunTimeVar;
 import water.ustc.dao.UserDAO;
-import water.ustc.factory.UserDAOFactory;
-import water.ustc.model.ConstRepo;
 import water.ustc.util.FormattedTime;
-
-import javax.sql.rowset.CachedRowSet;
-import java.sql.SQLException;
 
 /**
  * Creator: hfang
@@ -17,7 +10,7 @@ import java.sql.SQLException;
  **/
 
 public class UserBean {
-    private String userID;
+    private String ID;
     private String userName;
     private String userPassword;
     private UserDAO userDAO;
@@ -27,8 +20,8 @@ public class UserBean {
 
     }
 
-    public UserBean(String userID, String userName, String userPassword) {
-        this.userID = userID;
+    public UserBean(String ID, String userName, String userPassword) {
+        this.ID = ID;
         this.userName = userName;
         this.userPassword = userPassword;
     }
@@ -52,17 +45,23 @@ public class UserBean {
         System.out.println(TAG+"UserBean is signing");
         System.out.println(TAG+"name is "+userName+" password is "+userPassword);
         UserDAO userDAO = new UserDAO();
-        UserBean userBean = (UserBean) userDAO.query(this, "NAME");
+        UserBean userBean = (UserBean) userDAO.query(this, "userName");
 
-        return userBean != null && userBean.getUserPassword().equals(this.userPassword);
+        if(userBean==null) {
+            return false;
+        } else {
+            String password = userBean.getUserPassword();
+            return password.equals(this.userPassword);
+        }
+
     }
 
-    public String getUserID() {
-        return userID;
+    public String getID() {
+        return ID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
     public String getUserName() {

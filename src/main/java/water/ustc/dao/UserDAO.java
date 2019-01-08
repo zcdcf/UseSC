@@ -27,26 +27,8 @@ public class UserDAO extends BaseDAO {
     @Override
     public Object query(Object queryObj, String field) {
         Conversation conversation = new Conversation();
-        CachedRowSet rowSet = (CachedRowSet) conversation.query(queryObj, field);
-        try {
-            String name = null;
-            String password = null;
-            if(rowSet.next()) {
-                name = rowSet.getString(2);
-                System.out.println(TAG+"name="+name);
-                password = rowSet.getString(3);
-                System.out.println(TAG+"password="+password);
-            }
-            if(name==null) {
-                return null;
-            } else {
-                return new UserBean(ConstRepo.DB_DEFAULT_USERID, name, password);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        UserBean userBean = (UserBean) conversation.getObject(queryObj, field);
+        return userBean;
     }
 
     @Override
